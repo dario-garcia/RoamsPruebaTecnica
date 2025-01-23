@@ -26,6 +26,35 @@ tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 model = GPT2LMHeadModel.from_pretrained("gpt2")
 
 
+def check_message(message: MessageCreate):
+    """
+    Check if the message is valid.
+    """
+    if not 1 <= message.response_length <= 1024:
+        LOG.error("Invalid response_length")
+        raise HTTPException(
+            status_code=400, detail="response_length must be between 1 and 1024"
+        )
+    if not 0 <= message.response_top_k <= 50:
+        LOG.error("Invalid response_top_k")
+        raise HTTPException(
+            status_code=400, detail="response_top_k must be between 0 and 50"
+        )
+    if not 0 <= message.response_top_p <= 1:
+        LOG.error("Invalid response_top_p")
+        raise HTTPException(
+            status_code=400, detail="response_top_p must be between 0 and 1"
+        )
+    if not 0 <= message.response_temperature <= 1:
+        LOG.error("Invalid response_temperature")
+        raise HTTPException(
+            status_code=400, detail="response_temperature must be between 0 and 1"
+        )
+    if message.content == "" or message.content.isspace() or message.content is None:
+        LOG.error("Empty content")
+        raise HTTPException(status_code=400, detail="content must not be empty")
+
+
 def get_db():
     """
     Creates and closes the database session for each request.

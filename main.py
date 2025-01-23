@@ -1,7 +1,8 @@
 import logging
+import time
 from uuid import uuid4
 
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, Request, Response
 from sqlalchemy.orm import Session
 
 from database import SessionLocal, engine
@@ -21,6 +22,7 @@ from tools import (
     get_chat_history,
     generate_response,
     format_chat_history,
+    check_message,
 )
 
 
@@ -40,10 +42,50 @@ app = FastAPI()
 Base.metadata.create_all(bind=engine)
 
 
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    # Generating ID for the log
+    request_id = str(uuid4())
+    start_time = time.time()
+
+    LOG.info(f"[{request_id}] Started request: {request.method} {request.url}")
+
+    response: Response = await call_next(request)
+
+    process_time = (time.time() - start_time) * 1000  # en milisegundos
+
+    LOG.info(
+        f"[{request_id}] Completed request: "
+        f"{request.method} {request.url.path} "
+        f"Status: {response.status_code} "
+        f"Took: {process_time:.2f}ms"
+    )
+
+    response.headers["X-Request-ID"] = request_id
+
+    return response
+
+
 @app.post("/users/", response_model=UserSchema)
 def create_user(user: UserCreate, db: Session = Depends(get_db)) -> UserModel:
     """
     Creates a new user with a unique token.
+
+    Parameters:
+    ----------
+    user : UserCreate
+        The user data for creating a new user. Includes:
+        - username (str): The username for the new user.
+    db : Session
+        The database session dependency.
+
+    Returns:
+    -------
+    UserModel
+        The created user object, including:
+        - id (int): The ID of the user.
+        - username (str): The username of the user.
+        - token (str): A unique token generated for the user.
     """
 
     LOG.info(f"Creating user with username: {user.username}")
@@ -67,7 +109,20 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)) -> UserModel:
 @app.delete("/users/", response_model=str)
 def delete_user(user: UserDelete, db: Session = Depends(get_db)) -> str:
     """
-    Deletes a user by its token. This also removes all messages associated with the user.
+    Deletes a user by their token. This also removes all messages associated with the user.
+
+    Parameters:
+    ----------
+    user : UserDelete
+        The user data for deletion. Includes:
+        - token (str): The unique token identifying the user.
+    db : Session
+        The database session dependency.
+
+    Returns:
+    -------
+    str
+        A success message confirming the user deletion, including their username.
     """
 
     LOG.info(f"Deleting user with token: {user.token}")
@@ -90,10 +145,34 @@ def create_message(
     message: MessageCreate, db: Session = Depends(get_db)
 ) -> MessageModel:
     """
-    Creates a new message for a specific user.
-    An automatic response is generated using a GPT-based model.
+    Creates a new message for a specific user and generates an automatic response.
+
+    Parameters:
+    ----------
+    message : MessageCreate
+        The message data for creation. Includes:
+        - content (str): The content of the message.
+        - user_token (str): The token of the user who is sending the message.
+        - response_length (int, optional): Length of the generated response (default=50).
+        - response_temperature (float, optional): Sampling temperature for the response (default=0.7).
+        - response_top_p (float, optional): Nucleus sampling probability (default=0.95).
+        - response_top_k (int, optional): Top-k sampling limit (default=50).
+    db : Session
+        The database session dependency.
+
+    Returns:
+    -------
+    MessageModel
+        The created message object, including:
+        - id (int): The ID of the message.
+        - content (str): The content of the message.
+        - generated_response (str | None): The generated response to the message.
+        - user_id (int): The ID of the user associated with the message.
     """
     LOG.info(f"Creating message for user token: {message.user_token}")
+
+    # Check if the message is valid
+    check_message(message)
 
     # Check if the user exists
     db_user = get_user_by_token(db, message.user_token)
@@ -122,7 +201,25 @@ def create_message(
 def get_messages(user: UserDelete, db: Session = Depends(get_db)) -> list[MessageModel]:
     """
     Retrieves the entire chat history of a user.
+
+    Parameters:
+    ----------
+    user : UserDelete
+        The user data for retrieving the chat history. Includes:
+        - token (str): The unique token identifying the user.
+    db : Session
+        The database session dependency.
+
+    Returns:
+    -------
+    list[MessageModel]
+        A list of message objects representing the user's chat history. Each message includes:
+        - id (int): The ID of the message.
+        - content (str): The content of the message.
+        - generated_response (str | None): The generated response to the message.
+        - user_id (int): The ID of the user associated with the message.
     """
+
     LOG.info("Retrieving user chat history")
     return get_chat_history(user.token, db)
 
@@ -131,7 +228,21 @@ def get_messages(user: UserDelete, db: Session = Depends(get_db)) -> list[Messag
 def delete_messages(user: UserDelete, db: Session = Depends(get_db)) -> str:
     """
     Deletes the entire chat history of a user.
+
+    Parameters:
+    ----------
+    user : UserDelete
+        The user data for deleting the chat history. Includes:
+        - token (str): The unique token identifying the user.
+    db : Session
+        The database session dependency.
+
+    Returns:
+    -------
+    str
+        A success message confirming the deletion of the chat history.
     """
+
     LOG.info("Deleting user chat history")
 
     chat_history = get_chat_history(user.token, db)

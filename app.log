@@ -1,0 +1,82 @@
+2025-01-23 12:24:17,816 - INFO - [66f84431-effe-45bc-ab38-86bdaa246175] Started request: DELETE http://127.0.0.1:8000/users/
+2025-01-23 12:24:17,819 - INFO - Deleting user with token: f7fd89a3-ee27-4cca-98cf-e398001390bb
+2025-01-23 12:24:17,826 - INFO - User Dario found, proceeding with deletion
+2025-01-23 12:24:17,826 - INFO - Deleting user chat history
+2025-01-23 12:24:17,827 - INFO - Retrieving chat history for user with token: f7fd89a3-ee27-4cca-98cf-e398001390bb
+2025-01-23 12:24:17,829 - INFO - Found 16 messages in chat history
+2025-01-23 12:24:17,838 - INFO - Chat history deleted successfully
+2025-01-23 12:24:17,847 - INFO - User Dario deleted successfully and all messages removed
+2025-01-23 12:24:17,848 - INFO - [66f84431-effe-45bc-ab38-86bdaa246175] Completed request: DELETE /users/ Status: 200 Took: 32.34ms
+2025-01-23 12:25:13,819 - INFO - [8fdf7c60-03b9-415b-abc8-850a0433865f] Started request: POST http://127.0.0.1:8000/users/
+2025-01-23 12:25:13,823 - INFO - Creating user with username: Alberto
+2025-01-23 12:25:13,837 - INFO - User Alberto created with token 3d8c282f-7ace-4098-9635-1d1a458ad92e
+2025-01-23 12:25:13,838 - INFO - [8fdf7c60-03b9-415b-abc8-850a0433865f] Completed request: POST /users/ Status: 200 Took: 19.62ms
+2025-01-23 12:26:21,712 - INFO - [7c6b6209-a543-430f-b41a-58ba1a6d250a] Started request: POST http://127.0.0.1:8000/users/
+2025-01-23 12:26:21,715 - INFO - Creating user with username: Dario
+2025-01-23 12:26:21,723 - INFO - User Dario created with token 9bf21297-9840-4539-b254-bb08a28dca24
+2025-01-23 12:26:21,724 - INFO - [7c6b6209-a543-430f-b41a-58ba1a6d250a] Completed request: POST /users/ Status: 200 Took: 11.51ms
+2025-01-23 12:26:23,687 - INFO - [efd821de-b8ea-4063-8382-85c25549649d] Started request: POST http://127.0.0.1:8000/users/
+2025-01-23 12:26:23,688 - INFO - Creating user with username: Dario
+2025-01-23 12:26:23,689 - ERROR - Username already registered
+2025-01-23 12:26:23,689 - INFO - [efd821de-b8ea-4063-8382-85c25549649d] Completed request: POST /users/ Status: 400 Took: 2.68ms
+2025-01-23 12:26:53,903 - INFO - [122907d8-ec5d-4bc2-86a9-5f7891361574] Started request: POST http://127.0.0.1:8000/users/
+2025-01-23 12:26:53,905 - INFO - Creating user with username: Laura
+2025-01-23 12:26:53,914 - INFO - User Laura created with token 3f2febe4-744b-4357-9d79-75d99489d0cc
+2025-01-23 12:26:53,915 - INFO - [122907d8-ec5d-4bc2-86a9-5f7891361574] Completed request: POST /users/ Status: 200 Took: 12.04ms
+2025-01-23 12:27:51,649 - INFO - [ed7660a1-342f-45fe-af7a-f7ed22a38e2c] Started request: DELETE http://127.0.0.1:8000/users/
+2025-01-23 12:27:51,651 - INFO - Deleting user with token: 3f2febe4-744b-4357-9d79-75d99489d0cc
+2025-01-23 12:27:51,652 - INFO - User Laura found, proceeding with deletion
+2025-01-23 12:27:51,652 - INFO - Deleting user chat history
+2025-01-23 12:27:51,652 - INFO - Retrieving chat history for user with token: 3f2febe4-744b-4357-9d79-75d99489d0cc
+2025-01-23 12:27:51,654 - INFO - Found 0 messages in chat history
+2025-01-23 12:27:51,655 - INFO - Chat history deleted successfully
+2025-01-23 12:27:51,663 - INFO - User Laura deleted successfully and all messages removed
+2025-01-23 12:27:51,664 - INFO - [ed7660a1-342f-45fe-af7a-f7ed22a38e2c] Completed request: DELETE /users/ Status: 200 Took: 15.37ms
+2025-01-23 12:28:11,487 - INFO - [6f6377b6-2550-4b3b-8dc9-e3c7a9d7e1d5] Started request: DELETE http://127.0.0.1:8000/users/
+2025-01-23 12:28:11,488 - INFO - Deleting user with token: 1234
+2025-01-23 12:28:11,489 - ERROR - User does not exist
+2025-01-23 12:28:11,490 - INFO - [6f6377b6-2550-4b3b-8dc9-e3c7a9d7e1d5] Completed request: DELETE /users/ Status: 400 Took: 3.05ms
+2025-01-23 12:32:19,558 - INFO - [f339c68e-3c6a-411e-a8b2-d41ac34c2c35] Started request: POST http://127.0.0.1:8000/messages/
+2025-01-23 12:32:19,566 - INFO - Creating message for user token: 9bf21297-9840-4539-b254-bb08a28dca24
+2025-01-23 12:32:19,568 - INFO - User Dario found, generating response
+2025-01-23 12:32:19,568 - INFO - Retrieving chat history for user with token: 9bf21297-9840-4539-b254-bb08a28dca24
+2025-01-23 12:32:19,569 - INFO - Found 0 messages in chat history
+2025-01-23 12:32:21,080 - INFO - Message created. Content: Hi, are you a gpt model? | Response: "Yes. I am."
+I'm not sure if this is the same as what we're doing here but it's pretty clear that there was some sort
+2025-01-23 12:32:21,081 - INFO - [f339c68e-3c6a-411e-a8b2-d41ac34c2c35] Completed request: POST /messages/ Status: 200 Took: 1522.97ms
+2025-01-23 12:35:04,976 - INFO - [56c3cb59-97f7-4b86-adbb-d9e19b8d2463] Started request: POST http://127.0.0.1:8000/messages/
+2025-01-23 12:35:04,978 - INFO - Creating message for user token: 9bf21297-9840-4539-b254-bb08a28dca24
+2025-01-23 12:35:04,979 - INFO - User Dario found, generating response
+2025-01-23 12:35:04,979 - INFO - Retrieving chat history for user with token: 9bf21297-9840-4539-b254-bb08a28dca24
+2025-01-23 12:35:04,980 - INFO - Found 1 messages in chat history
+2025-01-23 12:35:06,476 - INFO - Message created. Content: Where is Disneyland World? | Response: "Disneyland, California."
+The answer to this question was a simple one. The Disney name for the park in Anaheim (the same as Walt's) came from an old
+2025-01-23 12:35:06,478 - INFO - [56c3cb59-97f7-4b86-adbb-d9e19b8d2463] Completed request: POST /messages/ Status: 200 Took: 1501.99ms
+2025-01-23 12:36:51,289 - INFO - [acca4636-c328-4da3-a3fb-42bee54550b1] Started request: POST http://127.0.0.1:8000/messages/
+2025-01-23 12:36:51,292 - INFO - Creating message for user token: 9bf21297-9840-4539-b254-bb08a28dca24
+2025-01-23 12:36:51,292 - ERROR - Empty content
+2025-01-23 12:36:51,293 - INFO - [acca4636-c328-4da3-a3fb-42bee54550b1] Completed request: POST /messages/ Status: 400 Took: 3.72ms
+2025-01-23 12:37:50,415 - INFO - [a8a1a781-e7dc-4169-8c14-5155eb25b2b9] Started request: GET http://127.0.0.1:8000/messages/
+2025-01-23 12:37:50,419 - INFO - Retrieving user chat history
+2025-01-23 12:37:50,419 - INFO - Retrieving chat history for user with token: 9bf21297-9840-4539-b254-bb08a28dca24
+2025-01-23 12:37:50,421 - INFO - Found 2 messages in chat history
+2025-01-23 12:37:50,423 - INFO - [a8a1a781-e7dc-4169-8c14-5155eb25b2b9] Completed request: GET /messages/ Status: 200 Took: 7.88ms
+2025-01-23 12:38:47,082 - INFO - [493e529f-103a-4140-b89d-2d5c7fd68e93] Started request: DELETE http://127.0.0.1:8000/messages/
+2025-01-23 12:38:47,084 - INFO - Deleting user chat history
+2025-01-23 12:38:47,084 - INFO - Retrieving chat history for user with token: 3d8c282f-7ace-4098-9635-1d1a458ad92e
+2025-01-23 12:38:47,086 - INFO - Found 0 messages in chat history
+2025-01-23 12:38:47,086 - INFO - Chat history deleted successfully
+2025-01-23 12:38:47,087 - INFO - [493e529f-103a-4140-b89d-2d5c7fd68e93] Completed request: DELETE /messages/ Status: 200 Took: 5.09ms
+2025-01-23 13:09:40,456 - INFO - [c2202987-3a5f-462d-812a-654dd4440204] Started request: POST http://127.0.0.1:8000/messages/
+2025-01-23 13:09:40,460 - INFO - Creating message for user token: 9bf21297-9840-4539-b254-bb08a28dca24
+2025-01-23 13:09:40,463 - INFO - User Dario found, generating response
+2025-01-23 13:09:40,463 - INFO - Retrieving chat history for user with token: 9bf21297-9840-4539-b254-bb08a28dca24
+2025-01-23 13:09:40,464 - INFO - Found 2 messages in chat history
+2025-01-23 13:10:16,378 - INFO - [3e2970b4-e2e2-41af-ac9f-c64c20d8b544] Started request: POST http://127.0.0.1:8000/messages/
+2025-01-23 13:10:16,380 - INFO - Creating message for user token: 9bf21297-9840-4539-b254-bb08a28dca24
+2025-01-23 13:10:16,381 - INFO - User Dario found, generating response
+2025-01-23 13:10:16,382 - INFO - Retrieving chat history for user with token: 9bf21297-9840-4539-b254-bb08a28dca24
+2025-01-23 13:10:16,383 - INFO - Found 2 messages in chat history
+2025-01-23 13:10:21,086 - INFO - Message created. Content: Where is located Spain? | Response: "Spain".
+The Spanish language has a very strong sense of history and culture. It's the most important part in our society, but it also contains many other things that are not easily understood by others (like religion). The word for this was 'Spanish'. In fact, I think we can say something like English or French if you want to understand what they mean better than us! So let me explain how my translation works
+2025-01-23 13:10:21,087 - INFO - [3e2970b4-e2e2-41af-ac9f-c64c20d8b544] Completed request: POST /messages/ Status: 200 Took: 4709.13ms
