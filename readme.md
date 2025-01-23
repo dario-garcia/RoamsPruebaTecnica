@@ -3,8 +3,8 @@ Primero, para preparar el entorno, hace falta tener instalado python. En mi caso
 
 Una vez instalado python, clona este repositorio y navega a la carpeta del proyecto:
 
->git clone https://github.com/yourusername/yourrepositoryname.git
->cd yourrepositoryname
+>git clone https://github.com/dario-garcia/RoamsPruebaTecnica
+>cd RoamsPruebaTecnica
 
 Tras clonar el repositorio, instale las dependencias encontradas en el archivo _requeriments.txt_
 
